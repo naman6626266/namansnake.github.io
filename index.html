@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid;
+            display: grid;
+            width:9%;
+            height:60px;
+            display: inline-block;  
+        }
+        #rollnumber{
+            font-size: 30px;
+        }
+        #b4,#b8,#b12,#b16,#b20,#b24,#b28,#b32,#b36,#b40,#b44,#b48,#b52,#b56,#b60,#b64,#b68,#b72,#b76,#b80,#b84,#b88,#b92,#b96{
+            background-color: royalblue;
+        }
+        #b3,#b6,#b9,#b15,#b18,#b21,#b27,#b30,#b33,#b39,#b42,#b45,#b48,#b51,#b54,#b57,#b63,#b66,#b69,#b72,#b75,#b78,#b81,#b87,#b90,#b93,#b99{
+            background-color: greenyellow;
+        }
+        #b1,#b5,#b10,#b14,#b19,#b62,#b23,#b26,#b35,#b38,#b46,#b50,#b58,#b61,#b73,#b82,#b86,#b75,#b98{
+            background-color: rgb(229, 93, 93);
+        }
+        #b2,#b7,#b11,#b13,#b17,#b13,#b22,#b25,#b29,#b31,#b34,#b37,#b41,#b43,#b47,#b49,#b53,#b55,#b59,#b61,#b65,#b67,#b70,#b71,#b74,#b77,#b79,#b83,#b85,#b89,#b91,#b94,#b95,#b97{
+            background-color: aqua;
+        }
+        #image{
+            height: 90px;
+            width: 70px;
+            position: absolute;
+            left: 29%;
+            top: 13%;
+        }
+        #image2{
+            height: 200px;
+            width: 70px;
+            position: absolute;
+            top: 183px;
+            left: 116px;
+            transform: rotate(330deg);
+        }
+        #image7{
+            height: 177px;
+            width: 70px;
+            position: absolute;
+            top: 432px;
+            left: 385px;
+            transform: rotate(330deg);
+        }
+        #image3{
+            height: 400px;
+            width: 120px;
+            position: absolute;
+            right: 213px;
+            top: 54px;
+            transform: rotate(343deg);
+        }   
+        #image4{
+            height: 147px;
+            width: 83px;
+            position: absolute;
+            bottom: 49px;
+            left: 118px;
+            transform: rotate(30deg);
+        }
+        #image5{
+            height: 252px;
+            width: 70px;
+            position: absolute;
+            bottom: -13px;
+            right: 314px;
+            transform: rotate(53deg);
+        }
+        #image6{
+            height: 210px;
+            width: 70px;
+            position: absolute;
+            top: 150px;
+            right: 661px;
+            transform: rotate(23deg);
+        }
+        #snake{
+            height: 223px;
+            width: 150px;
+            position: absolute;
+            left: 465px;
+            bottom: 180px;
+            transform: rotate(10deg);
+        }
+        #snake2{
+            height: 299px;
+            width: 150px;
+            position: absolute;
+            right: 484px;
+            bottom: 294px;
+            transform: rotate(10deg);
+        }
+        #snake3{
+            height: 369px;
+            width: 150px;
+            position: absolute;
+            right: 623px;
+            bottom: 24px;
+            transform: rotate(315deg);
+        }
+        #snake4{
+            height: 671px;
+            width: 150px;
+            position: absolute;
+            right: 203px;
+            bottom: 7px;
+            transform: rotate(10deg);
+        }
+        #snake5{
+            height: 263px;
+            width: 150px;
+            position: absolute;
+            right: 821px;
+            bottom: 40px;
+            transform: rotate(350deg);
+        }
+        #snake6{
+            height: 369px;
+            width: 150px;
+            position: absolute;
+            right: 1318px;
+            bottom: 24px;
+            transform: rotate(315deg);
+        }
+        #snake7{
+            height: 369px;
+            width: 150px;
+            position: absolute;
+            left: 115px;
+            top: 1px;
+            transform: rotate(44deg);
+        }
+        #snake8{
+            height: 223px;
+            width: 150px;
+            position: absolute;
+            left: 353px;
+            bottom: 356px;
+            transform: rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+    <button onclick="press()">Click to roll</button><br>
+    <span id="rollnumber"></span><br>
+    <img id="image" src="ladder.png">
+    <img id="image2" src="ladder.png">
+    <img id="image7" src="ladder.png">
+    <img id="image3" src="ladder.png">
+    <img id="image4" src="ladder.png">
+    <img id="image5" src="ladder.png">
+    <img id="image6" src="ladder.png">
+    <img id="snake" src="snake.png">
+    <img id="snake2" src="snake.png">
+    <img id="snake3" src="snake.png">
+    <img id="snake4" src="snake.png">
+    <img id="snake5" src="snake.png">
+    <img id="snake6" src="snake.png">
+    <img id="snake7" src="snake.png">
+    <img id="snake8" src="snake.png">
+</body>
+<script>
+    for(let i=1;i<101;i++){
+        let blocks=document.createElement("div");
+        blocks.setAttribute("id","b"+i+"");
+        blocks.innerText=i;
+        document.body.appendChild(blocks);
+}
+    document.getElementById("b100").innerHTML="<b>YOU WIN<b>";       
+let m="b1";
+let l=0;
+let cssObj;
+let bgColor="red";
+function press(){
+    document.getElementById(m).style.background=bgColor;
+    let number=Math.floor(Math.random() * 6+1);
+    document.getElementById("rollnumber").innerHTML=number;
+    l=l+number;
+    if(l==4){               
+        l=14;
+    }
+    else if(l==9){
+        l=60;
+    }
+    else if(l==17){
+        l=46;
+    }
+    else if(l==21){
+        l=42;
+    }
+    else if(l==31){
+        l=3;
+    }
+    else if(l==43){
+        l=14;
+    }
+    else if(l==57){
+        l=18;
+    }
+    else if(l==63){
+        l=84;
+    }
+    else if(l==72){
+        l=91;
+    }
+    else if(l==74){
+        l=45;
+    }
+    else if(l==80){
+        l=98;
+    }
+    else if(l==92){
+        l=41;
+    }
+    else if(l==95){
+        l=55;
+    }
+    else if(l==97){
+        l=46;
+    }
+    else if(l==99){
+        l=10;
+    }
+    cssObj = window.getComputedStyle(document.getElementById("b"+(l%100)+""), null);
+    bgColor = cssObj.getPropertyValue("background-color");
+    console.log(bgColor);
+    document.getElementById("b"+(l%100)+"").style.cssText="background:url(image.png) no-repeat center;background-size:20%";
+    m="b"+(l%100)+"";
+}
+</script>
+</html>
